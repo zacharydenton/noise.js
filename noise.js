@@ -1,6 +1,6 @@
 (function(AudioContext) {
 	AudioContext.prototype.createWhiteNoise = function(bufferSize) {
-		bufferSize ||= 4096;
+		bufferSize = bufferSize || 4096;
 		var node = audioContext.createJavaScriptNode(bufferSize, 1, 1);
 		node.onaudioprocess = function(e) {
 			var output = e.outputBuffer.getChannelData(0);
@@ -12,7 +12,7 @@
 	};
 
 	AudioContext.prototype.createPinkNoise = function(bufferSize) {
-		bufferSize ||= 4096;
+		bufferSize = bufferSize || 4096;
 		var b0, b1, b2, b3, b4, b5, b6;
 		b0 = b1 = b2 = b3 = b4 = b5 = b6 = 0.0;
 		var node = audioContext.createJavaScriptNode(bufferSize, 1, 1);
@@ -35,7 +35,7 @@
 	};
 
 	AudioContext.prototype.createBrownNoise = function(bufferSize) {
-		bufferSize ||= 4096;
+		bufferSize = bufferSize || 4096;
 		var lastOut = 0.0;
 		var node = audioContext.createJavaScriptNode(bufferSize, 1, 1);
 		node.onaudioprocess = function(e) {
