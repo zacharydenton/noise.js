@@ -2,21 +2,21 @@
 	AudioContext.prototype.createWhiteNoise = function(bufferSize) {
 		bufferSize = bufferSize || 4096;
 		var node = this.createScriptProcessor(bufferSize, 1, 1);
-		var playing = true;
+		var muted = false;
 		node.onaudioprocess = function(e) {
 			var output = e.outputBuffer.getChannelData(0);
 			for (var i = 0; i < bufferSize; i++) {
 				output[i] = Math.random() * 2 - 1;
-				if (!playing) {
+				if (muted) {
 					output[i] = null;
 				}
 			}
 		}
-		node.stop = function() {
-			playing = false;
+		node.mute = function() {
+			muted = true;
 		}
-		node.start = function() {
-			playing = true;
+		node.unmute = function() {
+			muted = false;
 		}
 		return node;
 	};
@@ -26,7 +26,7 @@
 		var b0, b1, b2, b3, b4, b5, b6;
 		b0 = b1 = b2 = b3 = b4 = b5 = b6 = 0.0;
 		var node = this.createScriptProcessor(bufferSize, 1, 1);
-		var playing = true;
+		var muted = false;
 		node.onaudioprocess = function(e) {
 			var output = e.outputBuffer.getChannelData(0);
 			for (var i = 0; i < bufferSize; i++) {
@@ -40,16 +40,16 @@
 				output[i] = b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362;
 				output[i] *= 0.11; // (roughly) compensate for gain
 				b6 = white * 0.115926;
-				if (!playing) {
+				if (muted) {
 					output[i] = null;
 				}
 			}
 		}
-		node.stop = function() {
-			playing = false;
+		node.mute = function() {
+			muted = true;
 		}
-		node.start = function() {
-			playing = true;
+		node.unmute = function() {
+			muted = false;
 		}
 		return node;
 	};
@@ -58,7 +58,7 @@
 		bufferSize = bufferSize || 4096;
 		var lastOut = 0.0;
 		var node = this.createScriptProcessor(bufferSize, 1, 1);
-		var playing = true;
+		var muted = false;
 		node.onaudioprocess = function(e) {
 			var output = e.outputBuffer.getChannelData(0);
 			for (var i = 0; i < bufferSize; i++) {
@@ -66,16 +66,16 @@
 				output[i] = (lastOut + (0.02 * white)) / 1.02;
 				lastOut = output[i];
 				output[i] *= 3.5; // (roughly) compensate for gain
-				if (!playing) {
+				if (muted) {
 					output[i] = null;
 				}
 			}
 		}
-		node.stop = function() {
-			playing = false;
+		node.mute = function() {
+			muted = true;
 		}
-		node.start = function() {
-			playing = true;
+		node.unmute = function() {
+			muted = false;
 		}
 		return node;
 	};
