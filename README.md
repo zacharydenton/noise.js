@@ -17,26 +17,26 @@ Usage
 
 Create a white noise generator and route it to the output:
 
-~~~~ {.javascript}
-var context = new webkitAudioContext();
+```javascript
+var context = new AudioContext();
 var whiteNoise = context.createWhiteNoise();
 whiteNoise.connect(context.destination);
-~~~~
+```
 
 ### Pink Noise
 
 Create a pink noise generator and route it to the output:
 
-~~~~ {.javascript}
-var context = new webkitAudioContext();
+```javascript
+var context = new AudioContext();
 var pinkNoise = context.createPinkNoise();
 pinkNoise.connect(context.destination);
-~~~~
+```
 
 Modulate a sawtooth oscillator with filtered pink noise:
 
 ```javascript
-var context = new webkitAudioContext();
+var context = new AudioContext();
 var pinkNoise = context.createPinkNoise();
 var pinkGain = context.createGainNode();
 var pinkFilter = context.createBiquadFilter();
@@ -61,16 +61,16 @@ sawGain.connect(context.destination);
 
 Create a brown noise generator and route it to the output:
 
-~~~~ {.javascript}
-var context = new webkitAudioContext();
+```javascript
+var context = new AudioContext();
 var brownNoise = context.createBrownNoise();
 brownNoise.connect(context.destination);
-~~~~
+```
 
 Modulate the brown noise amplitude to simulate the sound of the ocean:
 
 ```javascript
-var context = new webkitAudioContext();
+var context = new AudioContext();
 var brownNoise = context.createBrownNoise();
 var brownGain = context.createGainNode();
 brownGain.gain.value = 0.3;
